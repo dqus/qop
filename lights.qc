@@ -831,7 +831,7 @@ void() target_lightstyle_go =
 		return;
 	}
 	
-	entity l;
+	entity l = world;
 	if (self.target != string_null)
 	{
 		l = world;

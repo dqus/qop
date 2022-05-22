@@ -27,7 +27,7 @@ void() spikeshooter_fire =
 	if (self.state) return;
 	
 	vector dir;
-	entity e;
+	entity e = world;
 	
 	if (self.target != string_null)
 		e = find(world, targetname, self.target);

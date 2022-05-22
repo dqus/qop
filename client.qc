@@ -194,7 +194,7 @@ float() TransferKeys =
 {
 	if (!coop) return TRUE;
 	
-	float silver, gold, give;
+	float silver = 0, gold = 0, give;
 	entity recipient;	
 	
 	if (self.items & IT_KEY1)
@@ -1652,7 +1652,7 @@ called when a player dies
 void() ClientObituary =
 {
 	local	float rnum;
-	local	string deathstring, deathstring2;
+	local	string deathstring = string_null, deathstring2 = string_null;
 	rnum = random();
 	
 	entity attacker = self.enemy;

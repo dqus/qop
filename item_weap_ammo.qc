@@ -59,7 +59,7 @@ weapon_touch
 */
 void() weapon_touch =
 {
-	float	leave, nsw;
+	float	leave, nsw = FALSE;
 
 	if (!CheckValidTouch()) return;
 

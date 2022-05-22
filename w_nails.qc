@@ -63,7 +63,7 @@ void() spike_unfatten = { self.movetype = MOVETYPE_FLY; }
 
 void() W_FirePerforator =
 {
-	vector m;
+	vector m = '0 0 0';
 	sound (self, CHAN_WEAPON, "weapons/spike2.wav", 1, ATTN_NORM);
 	self.currentammo = self.ammo_nails = self.ammo_nails - 2;
 	

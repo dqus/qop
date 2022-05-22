@@ -234,7 +234,7 @@ entity(entity start) FindPreviousIntermission =
 {
 	if (!start) return world;
 	if (start.classname != "info_intermission") return start;
-	entity last, spot;
+	entity last = world, spot;
 	spot = find(world, classname, "info_intermission");
 	
 	if (spot == start)

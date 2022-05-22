@@ -42,7 +42,7 @@ void() BackpackTouch =
 	// coop 1: players can only pick up their own backpacks
 	if (coop == 1 && self.buddy && self.buddy != other) return;
 
-	float acount;
+	float acount = FALSE;
 	
 	other.ammo_shells = other.ammo_shells + self.ammo_shells;
 	other.ammo_nails = other.ammo_nails + self.ammo_nails;

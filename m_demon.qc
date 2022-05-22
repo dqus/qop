@@ -293,7 +293,7 @@ so we don't deflect off doorways and stairs and bounce around like an idiot
 float(vector attack, float ang) Demon_JumpSweep =
 {
 	vector corner, wmins, dir, arc, hullsize;
-	float headfails, stepfails;
+	float headfails = 0, stepfails = 0;
 	float sweepdist = 160;
 	
 	//bprint3("  sweep-checking ", ftos(ang), " degrees:\n");

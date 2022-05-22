@@ -216,7 +216,7 @@ float BAD_THETA = -666;
 float(vector dest, float speed, float th) BallisticTheta =
 {
 	float a, b, c, y, z;
-	float theta, tan_theta, oldtheta;
+	float theta, tan_theta, oldtheta = 0;
 
 	theta = th;
 	

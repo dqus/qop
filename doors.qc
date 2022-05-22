@@ -103,7 +103,7 @@ ACTIVATION FUNCTIONS
 
 void() door_fire =
 {
-	local entity 	oself;
+	local entity 	oself = self;
 	local entity	starte;
 		
 	if (self.owner != self)
@@ -121,7 +121,6 @@ void() door_fire =
 	}
 	else
 	{
-		oself = self;
 		if (self.state == STATE_TOP || self.state == STATE_UP )
 		{
 			starte = self;

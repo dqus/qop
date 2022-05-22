@@ -461,7 +461,7 @@ Returns FALSE if movement should continue
 */
 float() CheckAttack =
 {
-	local float		chance;
+	local float		chance = 0;
 
 	if (!CheckClearAttack()) return FALSE;
 
