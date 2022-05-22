@@ -1668,9 +1668,9 @@ void() ClientObituary =
 			if (e != self)
 			{
 				if (clientsAlive == 1)
-					centerprint2(e, self.netname, " is down -\nthere's no one left but you!");
+					centerprint(e, self.netname, " is down -\nthere's no one left but you!");
 				else
-					centerprint2(e, self.netname, " is down!");
+					centerprint(e, self.netname, " is down!");
 			}
 			e = nextent(e);
 		}

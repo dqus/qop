@@ -1,6 +1,11 @@
-../progs.dat
+#pragma target fte
+#pragma progs_dat "../progs.dat"
 #pragma autoproto
 #define COOP 1
+
+#includelist
+
+ssqc_api.qc
 
 defs.qc
 constants.qc
@@ -73,3 +78,5 @@ m_enforcer.qc	// registered
 m_oldone.qc		// registered
 
 test.qc
+
+#endlist

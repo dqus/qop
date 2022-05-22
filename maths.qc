@@ -2,7 +2,7 @@
 //	MATHS.
 // ===================
 
-float mathlib_accuracy; //accuracy of sqrt & pow
+//float mathlib_accuracy; //accuracy of sqrt & pow
 
 // frikqcc doesn't like it when i swizzle directly
 // TODO: see if fteqcc cares
@@ -50,35 +50,35 @@ vector(float num) SinCos =
 	return result;
 }
 
-float(float num) sin =
-{
-	vector temp;
-	temp = SinCos(num);
-	return temp_x;
-}
+//float(float num) sin =
+//{
+//	vector temp;
+//	temp = SinCos(num);
+//	return temp_x;
+//}
 
-float(float num) cos =
-{
-	vector temp;
-	temp = SinCos(num);
-	return temp_y;
-}
+//float(float num) cos =
+//{
+//	vector temp;
+//	temp = SinCos(num);
+//	return temp_y;
+//}
 
-float(float num) tan =
-{
-	vector temp;
-	temp = SinCos(num);
-	return temp_x / temp_y;
-}
+//float(float num) tan =
+//{
+//	vector temp;
+//	temp = SinCos(num);
+//	return temp_x / temp_y;
+//}
  
-float(float y, float x) atan2 =
-{
-	local vector ang; //temporary used to calculate trig values
-	ang = '0 0 0';
-	ang_x = x;
-	ang_y = y;
-	return vectoyaw(ang);
-}
+//float(float y, float x) atan2 =
+//{
+//	local vector ang; //temporary used to calculate trig values
+//	ang = '0 0 0';
+//	ang_x = x;
+//	ang_y = y;
+//	return vectoyaw(ang);
+//}
 
 vector(vector a, vector b) CrossProduct =
 {
@@ -193,8 +193,8 @@ vector(vector a, vector b) vec_scale =
 	return Vector(a_x * b_x, a_y * b_y, a_z * b_z);
 }
 
-float(float a, float b) min = { if (a <= b) return a; return b; }
-float(float a, float b) max = { if (a >= b) return a; return b; }
+//float(float a, float b) min = { if (a <= b) return a; return b; }
+//float(float a, float b) max = { if (a >= b) return a; return b; }
 float(float a, float mn, float mx) clamp = { if (a >= mx) return mx; if (a <= mn) return mn; return a; }
 float(float a) saturate = { return clamp(a, 0, 1); }
 
@@ -277,16 +277,16 @@ float(float base, float exp) ipow =
 // the following are by any one of the following people:
 // frikac, preach, kashua, lordhavoc, sock
 
-float(float a, float b) mod =
-{
-	return a - (floor(a / b) * b);
-}
+//float(float a, float b) mod =
+//{
+//	return a - (floor(a / b) * b);
+//}
 
 //faster version of id's anglemod
-float(float v) anglemod =
-{
-	return v - floor(v/360) * 360;
-}
+//float(float v) anglemod =
+//{
+//	return v - floor(v/360) * 360;
+//}
 
 float(float anga, float angb) angledif =
 {
@@ -298,26 +298,26 @@ float(float anga, float angb) angledif =
 }
 
 // mathlib_sqrt
-float(float num) sqrt =
-{
-	local float apr;
-
-	if(mathlib_accuracy <= 0)
-		mathlib_accuracy = 0.001;   //this sets a level of accuracy, it's a global float
-
-	if (num < mathlib_accuracy)
-		return 0;
-	if (num>1)
-		apr = num;
-	else
-		apr = 1;
-	do
-	{
-		apr = (num + (apr * apr)) / (2 * apr);
-	}
-	while (fabs((apr * apr) - num) > (num * mathlib_accuracy));
-	return apr;
-}
+//float(float num) sqrt =
+//{
+//	local float apr;
+//
+//	if(mathlib_accuracy <= 0)
+//		mathlib_accuracy = 0.001;   //this sets a level of accuracy, it's a global float
+//
+//	if (num < mathlib_accuracy)
+//		return 0;
+//	if (num>1)
+//		apr = num;
+//	else
+//		apr = 1;
+//	do
+//	{
+//		apr = (num + (apr * apr)) / (2 * apr);
+//	}
+//	while (fabs((apr * apr) - num) > (num * mathlib_accuracy));
+//	return apr;
+//}
 
 
 
