@@ -82,7 +82,7 @@ void(vector start, vector limit, entity from, float damage) LightningBeam =
 	// from is the originator of the beam - this is the shot monster when chaining
 	// self always remains the actual attacker
 	vector left, end;
-	entity targ;
+	entity targ = world;
 	// fix for wonky 'three beams' bug:
 	left = normalize(limit - start) * 12;
 	left = Vector(0 - left_y, left_x, 0);
@@ -130,7 +130,8 @@ void(vector start, vector limit, entity from, float damage) LightningBeam =
 	}
 	else
 	{
-		sound (targ, CHAN_BODY, "weapons/lhit.wav", 1, ATTN_NORM);
+		if (targ)
+			sound (targ, CHAN_BODY, "weapons/lhit.wav", 1, ATTN_NORM);
 		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 		WriteByte (MSG_BROADCAST, TE_LIGHTNING2);
 	}

@@ -224,7 +224,7 @@ void() ItemRotateAndSize =
 	if (self.ideal_yaw)
 		self.angles_y = crandom() * 90;
 	
-	vector offset, expand;	
+	vector offset, expand = '0 0 0';
 	offset = '16 16 0';
 	
 	// still caused items to sometimes shrink to points, this is a no go
