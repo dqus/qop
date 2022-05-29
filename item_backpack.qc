@@ -234,6 +234,11 @@ void() DropBackpack =
 {
 	entity item;
 
+	if ((self.flags & FL_MONSTER) && qop)
+	{
+		return; // Do not drop backpack in qop mode.
+	}
+
 	if (!(self.ammo_shells + self.ammo_nails + self.ammo_rockets + self.ammo_cells))
 		return;	// nothing in it
 

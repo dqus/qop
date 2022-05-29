@@ -180,7 +180,7 @@ void()	hknight_die8	=[	$death8,	hknight_die9	] {ai_forward(10);}
 void()	hknight_die9	=[	$death9,	hknight_die10	] {ai_forward(11);}
 void()	hknight_die10	=[	$death10,	hknight_die11	] {}
 void()	hknight_die11	=[	$death11,	hknight_die12	] {}
-void()	hknight_die12	=[	$death12,	hknight_die12	] {}
+void()	hknight_die12	=[	$death12,	hknight_die12	] { monster_init_fade(); }
 
 void()	hknight_dieb1	=[	$deathb1,	hknight_dieb2	] {}
 void()	hknight_dieb2	=[	$deathb2,	hknight_dieb3	] {}
@@ -191,7 +191,7 @@ void()	hknight_dieb5	=[	$deathb5,	hknight_dieb6	] {}
 void()	hknight_dieb6	=[	$deathb6,	hknight_dieb7	] {}
 void()	hknight_dieb7	=[	$deathb7,	hknight_dieb8	] {}
 void()	hknight_dieb8	=[	$deathb8,	hknight_dieb9	] {}
-void()	hknight_dieb9	=[	$deathb9,	hknight_dieb9	] {}
+void()	hknight_dieb9	=[	$deathb9,	hknight_dieb9	] { monster_init_fade(); }
 
 void() hknight_die =
 {
@@ -446,22 +446,22 @@ void() monster_hell_knight =
 		remove(self);
 		return;
 	}
-	precache_model2 ("progs/hknight.mdl");
-	precache_model2 ("progs/k_spike.mdl");
-	precache_model2 ("progs/h_hellkn.mdl");
+	safe_precache_model2 ("progs/hknight.mdl");
+	safe_precache_model2 ("progs/k_spike.mdl");
+	safe_precache_model2 ("progs/h_hellkn.mdl");
 
 	
-	precache_sound2 ("hknight/attack1.wav");
-	precache_sound2 ("hknight/death1.wav");
-	precache_sound2 ("hknight/pain1.wav");
-	precache_sound2 ("hknight/sight1.wav");
-	precache_sound ("hknight/hit.wav");		// used by C code, so don't sound2
-	precache_sound2 ("hknight/slash1.wav");
-	precache_sound2 ("hknight/idle.wav");
-	precache_sound2 ("hknight/grunt.wav");
+	safe_precache_sound2 ("hknight/attack1.wav");
+	safe_precache_sound2 ("hknight/death1.wav");
+	safe_precache_sound2 ("hknight/pain1.wav");
+	safe_precache_sound2 ("hknight/sight1.wav");
+	safe_precache_sound ("hknight/hit.wav");		// used by C code, so don't sound2
+	safe_precache_sound2 ("hknight/slash1.wav");
+	safe_precache_sound2 ("hknight/idle.wav");
+	safe_precache_sound2 ("hknight/grunt.wav");
 
-	precache_sound ("knight/sword1.wav");
-	precache_sound ("knight/sword2.wav");
+	safe_precache_sound ("knight/sword1.wav");
+	safe_precache_sound ("knight/sword2.wav");
 	
 	self.health = 250;
 	setsize (self, '-16 -16 -24', '16 16 40');

@@ -47,7 +47,8 @@ float(entity targ) range =
 		return RANGE_MELEE;
 	if (r < 500)
 		return RANGE_NEAR;
-	if (r < 900)
+	// In qop mode do not return range further than mid.
+	if (r < 900 || qop)
 		return RANGE_MID;
 	if (r < 1250)
 		return RANGE_FAR;
@@ -665,36 +666,50 @@ float() FindTarget =
 		return FALSE;		
 	if (client.classname != "player" && !FilterTarget(client.enemy))
 		return FALSE;	// don't wake up other monsters in notarget mode
-	
-	if (!visible (client))
-		return FALSE;
 
 	r = range(client);
 	
-	if (r == RANGE_NEAR)
+	// Detect client as enemy faster in qop mode.
+	if (qop == 0)
 	{
-		if (client.show_hostile < time && !infront(client))
+		if (!visible (client))
 			return FALSE;
-	}
-	else if (r == RANGE_MID || r == RANGE_FAR)
-	{
-		if ( !infront(client) )
-			return FALSE;
+
+		if (r == RANGE_NEAR)
+		{
+			if (client.show_hostile < time && !infront(client))
+				return FALSE;
+		}
+		else if (r == RANGE_MID || r == RANGE_FAR)
+		{
+			if ( !infront(client) )
+				return FALSE;
+		}
 	}
 	
 	// the only two things that alert monsters when invisible besides damage:
-	// - firing a weapon
+	// - firing a weapon (show_hostile flag)
 	// - bumping into a dog
 	if (has_invis(client))
 	{
-		if (self.classname == "monster_dog" && client.classname == "player")
+		if (client.show_hostile >= time)
 		{
-			if (r != RANGE_MELEE)
-				return FALSE;
+			// client fired weapon recently, so lets detect him as enemy.
+		}
+		else if (self.classname == "monster_dog" && client.classname == "player")
+		{
+			if (r == RANGE_MELEE)
+			{
+				// dog detected client as enemy.
+			}
+			else
+			{
+				return FALSE; // dog unabled to snif out client at such range.
+			}
 		} 
-		else if (client.show_hostile < time)
+		else
 		{
-			return FALSE;
+			return FALSE; // client is not detected as enemy.
 		}
 	}
 

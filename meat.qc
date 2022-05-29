@@ -26,28 +26,41 @@ vector(float dm) GibVelocityForHealth =
 	return v * voom;
 }
 
-void(entity gib, string gibname) MakeGib =
+void(entity gib, string gibname, bool head) MakeGib =
 {
-	gib.lifetime_finished = time + 8 + random() * 8;
+	if (qop)
+		gib.lifetime_finished = time + 4 + random() * 3;
+	else
+		gib.lifetime_finished = time + 8 + random() * 8;
+
 	gib.th_die = SUB_Remove;
 	
 	SUB_ChangeModel(gib, gibname);
 	gib.type = "gib";
-	gib.avelocity = Vector(random(),random(),random()) * 600;
+	if (head)
+		gib.avelocity = crandom() * '0 600 0';
+	else
+		gib.avelocity = Vector(random(),random(),random()) * 600;
 	
 	gib.frame = 0;
 	gib.flags = 0;
 }
 
-entity(string gibname, float dm) ThrowGib =
+entity(string gibname, float dm, bool head) ThrowGibEx =
 {
 	local entity gib;
 
 	// gibs have to be thinking ballistic projectiles to pass through monsterclip/notrace :(
-	gib = toss_projectile(self.origin, GibVelocityForHealth(dm), "gib");
-	MakeGib(gib, gibname);
+	vector vel = (head ? self.velocity : '0 0 0') + GibVelocityForHealth(dm);
+	gib = toss_projectile(self.origin, vel, "gib");
+	MakeGib(gib, gibname, head);
 	
 	return gib;
+}
+
+entity ThrowGib(string gibname, float dm)
+{
+	return ThrowGibEx(gibname, dm, false);
 }
 
 void(string gibname, float dm) ThrowHead =
@@ -61,7 +74,7 @@ void(string gibname, float dm) ThrowHead =
 	self.view_ofs = '0 0 8';
 	setsize (self, '-16 -16 0', '16 16 56');
 	self.velocity += GibVelocityForHealth(dm);
-	self.origin_z = self.origin_z - 24;
+	self.origin_z = self.origin_z - 24; // WTF?
 	self.flags = self.flags - (self.flags & FL_ONGROUND);
 	self.type = "head";
 	self.avelocity = crandom() * '0 600 0';
@@ -76,15 +89,28 @@ void(string headmdl, float dm) GibSpray =
 	ThrowGib ("progs/gib2.mdl", dm);
 	ThrowGib ("progs/gib3.mdl", dm);
 	
-	if (self.classname != "player")
-		if (damage_attacker.classname == "trigger_void" || damage_attacker.classname == "func_void" )
-		{
-			SUB_Remove();
-			return;
-		}
+	// Player's head are special.
+	if (self.classname == "player")
+	{
+		ThrowHead(headmdl, dm);
+		return;
+	}
+	// Below non player's head.
+	// Handle special damage attackers.
+	if (damage_attacker.classname == "trigger_void" || damage_attacker.classname == "func_void" )
+	{
+		remove(self);
+		return;
+	}
+	// qop mode heads are special.
+	if (qop)
+	{
+		ThrowGibEx(headmdl, dm, true);
+		remove(self);
+		return;
+	}
 
-		
-	ThrowHead (headmdl, dm);
+	ThrowHead(headmdl, dm);
 }
 
 void(string headmdl, float dm) Gib =
@@ -156,7 +182,7 @@ void(string gibname) target_meat_fireworks_do =
 	spray *= self.speed * 2;
 	
 	gib = toss_projectile(self.origin, spray, "gib");
-	MakeGib(gib, gibname);
+	MakeGib(gib, gibname, false);
 }
 
 void() target_meat_fireworks_go =

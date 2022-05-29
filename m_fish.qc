@@ -191,7 +191,7 @@ void() f_death17 =[	$death17, f_death18 ] {}
 void() f_death18 =[	$death18, f_death19 ] {}
 void() f_death19 =[	$death19, f_death20 ] {}
 void() f_death20 =[	$death20, f_death21 ] {}
-void() f_death21 =[	$death21, f_death21 ] {}
+void() f_death21 =[	$death21, f_death21 ] { monster_init_fade(); }
 
 void() f_pain1 =[	$pain1, f_pain2 ] {ai_nop();}
 void() f_pain2 =[	$pain2, f_pain3 ] {ai_pain(6);}
@@ -220,7 +220,7 @@ void() fish_gib =
 	mvel_z = random() * 256;
 
 	meat = toss_projectile(self.origin, mvel, "gib");
-	MakeGib(meat, "progs/zom_gib.mdl");
+	MakeGib(meat, "progs/zom_gib.mdl", false);
 	meat.lifetime_finished = time + 1;
 }
 
@@ -313,11 +313,11 @@ void() monster_fish =
 		remove(self);
 		return;
 	}
-	precache_model2 ("progs/fish.mdl");
-	precache_model ("progs/zom_gib.mdl");
-	precache_sound2 ("fish/death.wav");
-	precache_sound2 ("fish/bite.wav");
-	precache_sound2 ("fish/idle.wav");
+	safe_precache_model2 ("progs/fish.mdl");
+	safe_precache_model ("progs/zom_gib.mdl");
+	safe_precache_sound2 ("fish/death.wav");
+	safe_precache_sound2 ("fish/bite.wav");
+	safe_precache_sound2 ("fish/idle.wav");
 
 	self.health = 35;
 	setsize (self, '-16 -16 -16', '16 16 16');

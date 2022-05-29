@@ -141,7 +141,7 @@ void()	demon1_die5		=[	$death5,		demon1_die6	] {}
 void()	demon1_die6		=[	$death6,		demon1_die7	] {}
 void()	demon1_die7		=[	$death7,		demon1_die8	] {}
 void()	demon1_die8		=[	$death8,		demon1_die9	] {}
-void()	demon1_die9		=[	$death9,		demon1_die9 ] {}
+void()	demon1_die9		=[	$death9,		demon1_die9 ] { monster_init_fade(); }
 
 void() demon_die =
 {
@@ -616,16 +616,16 @@ void() monster_demon1 =
 		remove(self);
 		return;
 	}
-	precache_model ("progs/demon.mdl");
-	precache_model ("progs/h_demon.mdl");
+	safe_precache_model ("progs/demon.mdl");
+	safe_precache_model ("progs/h_demon.mdl");
 
-	precache_sound ("demon/ddeath.wav");
-	precache_sound ("demon/dhit2.wav");
-	precache_sound ("demon/djump.wav");
-	precache_sound ("demon/dpain1.wav");
-	precache_sound ("demon/idle1.wav");
-	precache_sound ("demon/sight2.wav");
-	precache_sound ("misc/null.wav");
+	safe_precache_sound ("demon/ddeath.wav");
+	safe_precache_sound ("demon/dhit2.wav");
+	safe_precache_sound ("demon/djump.wav");
+	safe_precache_sound ("demon/dpain1.wav");
+	safe_precache_sound ("demon/idle1.wav");
+	safe_precache_sound ("demon/sight2.wav");
+	safe_precache_sound ("misc/null.wav");
 
 	self.health = 300;
 	setsize (self, VEC_HULL2_MIN, '32 32 40');

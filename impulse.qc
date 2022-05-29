@@ -6,12 +6,28 @@ IMPULSES
 ==============================================================================
 */
 
+bool Cheats_Allowed(void)
+{
+	return cvar("sv_cheats");
+}
+
+bool Cheats_Allowed_For_Client(entity client)
+{
+	if (Cheats_Allowed())
+	{
+		return true;
+	}
+	client_printf(client, "Cheats are not allowed on this server\n");
+	return false;
+}
+
+
 // --------------------------------
 // Cheat_Keys
 // --------------------------------
 void() Cheat_Keys =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
 
 	self.items = self.items |
@@ -27,7 +43,7 @@ void() Cheat_Keys =
 // --------------------------------
 void() Cheat_Items =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
 
 	self.ammo_shells = MAX_AMMO_SHELLS;
@@ -57,6 +73,14 @@ void() Cheat_Items =
 // Cheat_Genocide
 // --------------------------------
 void() Cheat_Genocide =
+{
+	if(!Cheats_Allowed_For_Client(self))
+		return;
+
+	ExecuteGenocide();
+}
+
+void ExecuteGenocide(void)
 {
 	entity t;
 	
@@ -91,8 +115,9 @@ void() Cheat_Genocide =
 // --------------------------------
 void() Cheat_Undying =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
+
 	if(self.customflags & CFL_UNDYING)
 	{
 		sprint(self, "Undying mode disabled\n");
@@ -109,8 +134,9 @@ void() Cheat_Undying =
 // --------------------------------
 void() Cheat_Quad =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
+
 	stuffcmd(self, "bf\n");
 	self.items = self.items | IT_QUAD;
 	powerup_super_damage(self, 30);
@@ -121,8 +147,9 @@ void() Cheat_Quad =
 // --------------------------------
 void() Cheat_Pent =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
+
 	stuffcmd(self, "bf\n");
 	self.items = self.items | IT_INVULNERABILITY;
 	powerup_invulnerability(self, 30);
@@ -133,8 +160,9 @@ void() Cheat_Pent =
 // --------------------------------
 void() Cheat_Ring =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
+
 	stuffcmd(self, "bf\n");
 	self.items = self.items | IT_INVISIBILITY;
 	powerup_invisibility(self, 30);
@@ -145,8 +173,9 @@ void() Cheat_Ring =
 // --------------------------------
 void() Cheat_Suit =
 {
-	if(deathmatch || coop)
+	if(!Cheats_Allowed_For_Client(self))
 		return;
+
 	stuffcmd(self, "bf\n");
 	self.items = self.items | IT_SUIT;
 	powerup_envirosuit(self, 30);
@@ -254,8 +283,7 @@ void() ImpulseCommands =
 	// nah. makes it sound like there aren't that many orders
 	case 66:
 	case 205:
-		if(!deathmatch && !coop)
-			Cheat_Genocide();
+		Cheat_Genocide();
 		break;
 	case 200:
 		dev_remaining_monsters();

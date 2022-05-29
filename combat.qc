@@ -301,6 +301,11 @@ T_ReactToDamage
 */
 void( entity attacker ) T_ReactToDamage =
 {
+	if (qop && !(attacker.flags & FL_CLIENT))
+	{
+		return; // in qop mode get mad only at players.
+	}
+
 	// ignore doors and nailshooters and so on
 	if (!(attacker.flags & (FL_MONSTER|FL_CLIENT))) return;
 	// ignore self dmg

@@ -144,21 +144,21 @@ void() knight_attack =
 
 //===========================================================================
 
-void()	knight_pain1	=[	$pain1,		knight_pain2	] {ai_nop();  }
-void()	knight_pain2	=[	$pain2,		knight_pain3	] {ai_nop(); }
-void()	knight_pain3	=[	$pain3,		knight_run1	] {ai_nop(); }
+void()	knight_pain1	=[	$pain1,		knight_pain2	] {}
+void()	knight_pain2	=[	$pain2,		knight_pain3	] {}
+void()	knight_pain3	=[	$pain3,		knight_run1	] {}
 
-void()	knight_painb1	=[	$painb1,	knight_painb2	] {ai_nop(); }
+void()	knight_painb1	=[	$painb1,	knight_painb2	] {}
 void()	knight_painb2	=[	$painb2,	knight_painb3	] {ai_painforward(3);}
-void()	knight_painb3	=[	$painb3,	knight_painb4	] {ai_nop();}
-void()	knight_painb4	=[	$painb4,	knight_painb5	] {ai_nop();}
+void()	knight_painb3	=[	$painb3,	knight_painb4	] {}
+void()	knight_painb4	=[	$painb4,	knight_painb5	] {}
 void()	knight_painb5	=[	$painb5,	knight_painb6	] {ai_painforward(2);}
 void()	knight_painb6	=[	$painb6,	knight_painb7	] {ai_painforward(4);}
 void()	knight_painb7	=[	$painb7,	knight_painb8	] {ai_painforward(2);}
 void()	knight_painb8	=[	$painb8,	knight_painb9	] {ai_painforward(5);}
 void()	knight_painb9	=[	$painb9,	knight_painb10	] {ai_painforward(5);}
-void()	knight_painb10	=[	$painb10,	knight_painb11	] {ai_nop();}
-void()	knight_painb11	=[	$painb11,	knight_run1	] {ai_nop();}
+void()	knight_painb10	=[	$painb10,	knight_painb11	] {}
+void()	knight_painb11	=[	$painb11,	knight_run1	] {}
 
 void(entity attacker, float damage)	knight_pain =
 {
@@ -192,29 +192,29 @@ void()	knight_bow8	=[	$kneel2,		knight_bow9	] {ai_turn();}
 void()	knight_bow9	=[	$kneel1,		knight_bow10	] {ai_turn();}
 void()	knight_bow10	=[	$walk1,		knight_walk1	] {ai_turn();}
 
-void()	knight_die1	=[	$death1,	knight_die2	] {ai_nop();}
-void()	knight_die2	=[	$death2,	knight_die3	] {ai_nop();}
-void()	knight_die3	=[	$death3,	knight_die4	] {ai_nop();}
-void()	knight_die4	=[	$death4,	knight_die5	] {ai_nop();self.solid = SOLID_NOT;}
-void()	knight_die5	=[	$death5,	knight_die6	] {ai_nop();}
-void()	knight_die6	=[	$death6,	knight_die7	] {ai_nop();}
-void()	knight_die7	=[	$death7,	knight_die8	] {ai_nop();}
-void()	knight_die8	=[	$death8,	knight_die9	] {ai_nop();}
-void()	knight_die9	=[	$death9,	knight_die10] {ai_nop();}
-void()	knight_die10=[	$death10,	SUB_Null] {ai_nop(); if (self.lip == 555) self.think = SUB_Remove;}
+void()	knight_die1	=[	$death1,	knight_die2	] {}
+void()	knight_die2	=[	$death2,	knight_die3	] {}
+void()	knight_die3	=[	$death3,	knight_die4	] {}
+void()	knight_die4	=[	$death4,	knight_die5	] {self.solid = SOLID_NOT;}
+void()	knight_die5	=[	$death5,	knight_die6	] {}
+void()	knight_die6	=[	$death6,	knight_die7	] {}
+void()	knight_die7	=[	$death7,	knight_die8	] {}
+void()	knight_die8	=[	$death8,	knight_die9	] {}
+void()	knight_die9	=[	$death9,	knight_die10	] {}
+void()	knight_die10	=[	$death10,	knight_die10	] { monster_init_fade(); }
 
 
-void()	knight_dieb1	=[	$deathb1,	knight_dieb2	] {ai_nop();}
-void()	knight_dieb2	=[	$deathb2,	knight_dieb3	] {ai_nop();}
-void()	knight_dieb3	=[	$deathb3,	knight_dieb4	] {ai_nop();}
-void()	knight_dieb4	=[	$deathb4,	knight_dieb5	] {ai_nop();self.solid = SOLID_NOT;}
-void()	knight_dieb5	=[	$deathb5,	knight_dieb6	] {ai_nop();}
-void()	knight_dieb6	=[	$deathb6,	knight_dieb7	] {ai_nop();}
-void()	knight_dieb7	=[	$deathb7,	knight_dieb8	] {ai_nop();}
-void()	knight_dieb8	=[	$deathb8,	knight_dieb9	] {ai_nop();}
-void()	knight_dieb9	=[	$deathb9,	knight_dieb10] {ai_nop();}
-void()	knight_dieb10 = [	$deathb10,	knight_dieb11] {ai_nop();}
-void()	knight_dieb11 = [	$deathb11,	SUB_Null] {ai_nop(); if (self.lip == 555) self.think = SUB_Remove;}
+void()	knight_dieb1	=[	$deathb1,	knight_dieb2	] {}
+void()	knight_dieb2	=[	$deathb2,	knight_dieb3	] {}
+void()	knight_dieb3	=[	$deathb3,	knight_dieb4	] {}
+void()	knight_dieb4	=[	$deathb4,	knight_dieb5	] {self.solid = SOLID_NOT;}
+void()	knight_dieb5	=[	$deathb5,	knight_dieb6	] {}
+void()	knight_dieb6	=[	$deathb6,	knight_dieb7	] {}
+void()	knight_dieb7	=[	$deathb7,	knight_dieb8	] {}
+void()	knight_dieb8	=[	$deathb8,	knight_dieb9	] {}
+void()	knight_dieb9	=[	$deathb9,	knight_dieb10	] {}
+void()	knight_dieb10	=[	$deathb10,	knight_dieb11	] {}
+void()	knight_dieb11	=[	$deathb11,	knight_dieb11	] { monster_init_fade(); }
 
 
 void() knight_die =
@@ -294,19 +294,19 @@ void() monster_knight =
 		remove(self);
 		return;
 	}
-	precache_model ("progs/knight.mdl");
-	precache_model ("progs/h_knight.mdl");
+	safe_precache_model ("progs/knight.mdl");
+	safe_precache_model ("progs/h_knight.mdl");
 
 	// FIXME debug shit remove this
 	//precache_model3 ("progs/knight_s.mdl");
 	//precache_model3 ("progs/knight_s2.mdl");
 
-	precache_sound ("knight/kdeath.wav");
-	precache_sound ("knight/khurt.wav");
-	precache_sound ("knight/ksight.wav");
-	precache_sound ("knight/sword1.wav");
-	precache_sound ("knight/sword2.wav");
-	precache_sound ("knight/idle.wav");
+	safe_precache_sound ("knight/kdeath.wav");
+	safe_precache_sound ("knight/khurt.wav");
+	safe_precache_sound ("knight/ksight.wav");
+	safe_precache_sound ("knight/sword1.wav");
+	safe_precache_sound ("knight/sword2.wav");
+	safe_precache_sound ("knight/idle.wav");
 
 	self.health = 72;
 	setsize (self, '-16 -16 -24', '16 16 40');

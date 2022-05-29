@@ -388,6 +388,23 @@ float	isKex;	// running the quake rerelease
 
 //================================================
 
+typedef enum
+{
+	true = 1,
+	false = 0,
+	TRUE = 1,
+	FALSE = 0
+} bool;
+
+//================================================
+
+#define printf(...) print(sprintf(__VA_ARGS__))
+#define client_printf(client, ...) sprint(client, sprintf(__VA_ARGS__))
+
+#define array_len(_a) (sizeof(_a) / sizeof((_a)[0]))
+
+//================================================
+
 /*FGD
 @baseclass = Angle [ angle(integer) : "Direction" ]
 @baseclass = Appearflags [

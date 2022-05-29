@@ -345,6 +345,10 @@ void() StartFrame =
 {
 	teamplay = cvar("teamplay");
 	skill = cvar("skill");
+	if (framecount == 0)
+	{
+		qop = cvar("qop");
+	}
 	
 	if (cleanUpClientShit)
 		cleanUpClientShit -= 1;
@@ -372,6 +376,8 @@ void() StartFrame =
 	impossible to reproduce moment.
 	*/
 	activator = world;
+
+	qop_think();
 }
 
 /*

@@ -88,7 +88,7 @@ void() shal_death3      =[      $death3,        shal_death4     ] {}
 void() shal_death4      =[      $death4,        shal_death5     ] {}
 void() shal_death5      =[      $death5,        shal_death6     ] {}
 void() shal_death6      =[      $death6,        shal_death7     ] {}
-void() shal_death7      =[      $death7,        shal_death7    ] {}
+void() shal_death7      =[      $death7,        shal_death7    ] { monster_init_fade(); }
 
 
 void( entity attacker, float damage ) shalrath_pain =
@@ -352,16 +352,16 @@ void() monster_shalrath =
 		remove(self);
 		return;
 	}
-	precache_model2 ("progs/shalrath.mdl");
-	precache_model2 ("progs/h_shal.mdl");
-	precache_model2 ("progs/v_spike.mdl");
+	safe_precache_model2 ("progs/shalrath.mdl");
+	safe_precache_model2 ("progs/h_shal.mdl");
+	safe_precache_model2 ("progs/v_spike.mdl");
 	
-	precache_sound2 ("shalrath/attack.wav");
-	precache_sound2 ("shalrath/attack2.wav");
-	precache_sound2 ("shalrath/death.wav");
-	precache_sound2 ("shalrath/idle.wav");
-	precache_sound2 ("shalrath/pain.wav");
-	precache_sound2 ("shalrath/sight.wav");
+	safe_precache_sound2 ("shalrath/attack.wav");
+	safe_precache_sound2 ("shalrath/attack2.wav");
+	safe_precache_sound2 ("shalrath/death.wav");
+	safe_precache_sound2 ("shalrath/idle.wav");
+	safe_precache_sound2 ("shalrath/pain.wav");
+	safe_precache_sound2 ("shalrath/sight.wav");
 	
 	self.health = 400;
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);

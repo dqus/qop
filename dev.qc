@@ -8,6 +8,7 @@ DEV COMMANDS
 
 void() dev_test =
 {
+#if 0
 	local vector org;
 	makevectors(self.v_angle);
 	org = self.origin + self.view_ofs;
@@ -23,6 +24,10 @@ void() dev_test =
 		head =  head.chain;
 	}
 	bprint("-----\n");
+#else
+	string occupied = is_location_occupied(self, self.origin) ? "yes" : "no";
+	printf("occupied: %s\n", occupied);
+#endif
 }
 
 void() dev_tracetest =

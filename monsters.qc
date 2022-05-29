@@ -165,7 +165,7 @@ void(float num) addmonster =
 	if (!self.th_checkattack)
 		self.th_checkattack = CheckAttack;
 	
-	if (!num) return;
+	if (!num || qop) return;
 	
 	total_monsters = total_monsters + num;
 	WriteByte (MSG_ALL, SVC_UPDATESTAT);
@@ -405,7 +405,13 @@ void() monster_start =
 		
 	// moved from mon_spawner_use because it was too early to catch the monster's mins and maxs
 	if (self.type != "zombie" || !(self.spawnflags & SPAWN_LYING))	// lying zombies are nonsolid
-		spawn_tdeath(self.origin, self);
+	{
+		// Spawn teleport death trigger only in NON qop mode since qop already do similar check with is_location_occupied().
+		if (qop == 0)
+		{
+			spawn_tdeath(self.origin, self);
+		}
+	}
 
 	// wait a few frames to make sure doors have spawned before doing droptofloor
 	self.nextthink = 1.15;
@@ -538,11 +544,18 @@ void() walkmonster_start_go =
 	monster_start_go();
 }
 
-
 void() walkmonster_start =
 {
+	if (qop_remove_monster_if_location_occupied())
+	{
+		return;
+	}
 	monster_start();
 	self.think = walkmonster_start_go;
+	if (qop)
+	{
+		self.think();
+	}
 }
 
 /*
@@ -576,11 +589,19 @@ void() flymonster_start_go =
 
 void() flymonster_start =
 {
+	if (qop_remove_monster_if_location_occupied())
+	{
+		return;
+	}
 	monster_start();
 	// iw -- move these here so fish don't fall for a frame and a half
 	self.flags = self.flags | FL_FLY;
 
 	self.think = flymonster_start_go;
+	if (qop)
+	{
+		self.think();
+	}
 }
 
 /*
@@ -608,11 +629,19 @@ void() swimmonster_start_go =
 
 void() swimmonster_start =
 {
+	if (qop_remove_monster_if_location_occupied())
+	{
+		return;
+	}
 	monster_start();
 	// iw -- move these here so fish don't fall for a frame and a half
 	self.flags = self.flags | FL_SWIM;
 
 	self.think = swimmonster_start_go;
+	if (qop)
+	{
+		self.think();
+	}
 }
 
 

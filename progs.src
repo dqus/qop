@@ -1,6 +1,7 @@
 #pragma target fte
 #pragma progs_dat "../progs.dat"
 #pragma autoproto
+#pragma warning disable F210 // disable not directly precached warnings.
 #define COOP 1
 
 #includelist
@@ -76,6 +77,8 @@ m_fish.qc		// registered
 m_shalrath.qc	// registered
 m_enforcer.qc	// registered
 m_oldone.qc		// registered
+
+qop.qc
 
 test.qc
 

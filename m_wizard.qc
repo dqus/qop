@@ -283,7 +283,7 @@ void()	wiz_death4	=[	$death4,		wiz_death5	] {}
 void()	wiz_death5	=[	$death5,		wiz_death6	] {}
 void()	wiz_death6	=[	$death6,		wiz_death7	] {}
 void()	wiz_death7	=[	$death7,		wiz_death8	] {}
-void()	wiz_death8	=[	$death8,		wiz_death8	] {}// deathvoidcheck(); }
+void()	wiz_death8	=[	$death8,		wiz_death8	] { monster_init_fade(); }// deathvoidcheck(); }
 
 void() wiz_die =
 {
@@ -363,17 +363,17 @@ void() monster_wizard =
 		remove(self);
 		return;
 	}
-	precache_model ("progs/wizard.mdl");
-	precache_model ("progs/h_wizard.mdl");
-	precache_model ("progs/w_spike.mdl");
+	safe_precache_model ("progs/wizard.mdl");
+	safe_precache_model ("progs/h_wizard.mdl");
+	safe_precache_model ("progs/w_spike.mdl");
 
-	precache_sound ("wizard/hit.wav");		// used by c code
-	precache_sound ("wizard/wattack.wav");
-	precache_sound ("wizard/wdeath.wav");
-	precache_sound ("wizard/widle1.wav");
-	precache_sound ("wizard/widle2.wav");
-	precache_sound ("wizard/wpain.wav");
-	precache_sound ("wizard/wsight.wav");
+	safe_precache_sound ("wizard/hit.wav");		// used by c code
+	safe_precache_sound ("wizard/wattack.wav");
+	safe_precache_sound ("wizard/wdeath.wav");
+	safe_precache_sound ("wizard/widle1.wav");
+	safe_precache_sound ("wizard/widle2.wav");
+	safe_precache_sound ("wizard/wpain.wav");
+	safe_precache_sound ("wizard/wsight.wav");
 
 	self.health = 80;
 	//setsize (self, '-16 -16 -24', '16 16 40');

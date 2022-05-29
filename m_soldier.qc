@@ -256,7 +256,7 @@ void()	army_die6	=[	$death6,	army_die7	] {}
 void()	army_die7	=[	$death7,	army_die8	] {}
 void()	army_die8	=[	$death8,	army_die9	] {}
 void()	army_die9	=[	$death9,	army_die10	] {}
-void()	army_die10	=[	$death10,	army_die10	] {}
+void()	army_die10	=[	$death10,	army_die10	] { monster_init_fade(); }
 
 void()	army_cdie1	=[	$deathc1,	army_cdie2	] {}
 void()	army_cdie2	=[	$deathc2,	army_cdie3	] {ai_back(5);}
@@ -269,7 +269,7 @@ void()	army_cdie7	=[	$deathc7,	army_cdie8	] {}
 void()	army_cdie8	=[	$deathc8,	army_cdie9	] {}
 void()	army_cdie9	=[	$deathc9,	army_cdie10	] {}
 void()	army_cdie10	=[	$deathc10,	army_cdie11	] {}
-void()	army_cdie11	=[	$deathc11,	army_cdie11	] {}
+void()	army_cdie11	=[	$deathc11,	army_cdie11	] { monster_init_fade(); }
 
 
 void() army_die =
@@ -347,18 +347,18 @@ void() monster_army =
 		remove(self);
 		return;
 	}
-	precache_model ("progs/soldier.mdl");
-	precache_model ("progs/h_guard.mdl");
-	precache_model ("progs/gib1.mdl");
-	precache_model ("progs/gib2.mdl");
-	precache_model ("progs/gib3.mdl");
+	safe_precache_model ("progs/soldier.mdl");
+	safe_precache_model ("progs/h_guard.mdl");
+	safe_precache_model ("progs/gib1.mdl");
+	safe_precache_model ("progs/gib2.mdl");
+	safe_precache_model ("progs/gib3.mdl");
 
-	precache_sound ("soldier/death1.wav");
-	precache_sound ("soldier/idle.wav");
-	precache_sound ("soldier/pain1.wav");
-	precache_sound ("soldier/pain2.wav");
-	precache_sound ("soldier/sattck1.wav");
-	precache_sound ("soldier/sight1.wav");
+	safe_precache_sound ("soldier/death1.wav");
+	safe_precache_sound ("soldier/idle.wav");
+	safe_precache_sound ("soldier/pain1.wav");
+	safe_precache_sound ("soldier/pain2.wav");
+	safe_precache_sound ("soldier/sattck1.wav");
+	safe_precache_sound ("soldier/sight1.wav");
 
 	precache_sound ("player/udeath.wav");		// gib death
 	self.health = 35;

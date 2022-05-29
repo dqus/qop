@@ -178,6 +178,21 @@ vector(vector b, vector a, float r) rotateVectorAround =
 	return b*cos + cross*sin + a*dot*(1-cos);
 }
 
+// Returns integer number in [from, to] range.
+int i_rnd(int from, int to)
+{
+	float r;
+
+	if (from >= to)
+	{
+		return from;
+	}
+
+	r = (int)(from + (1.0 + to - from) * random());
+
+	return bound(from, r, to);
+}
+
 float() crandom =
 {
 	return 2*(random() - 0.5);

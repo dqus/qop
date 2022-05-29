@@ -249,7 +249,7 @@ void(entity attacker, float damage) tbaby_pain =
 void()	tbaby_die1	=[	$exp,		tbaby_die2	] {
 self.takedamage = DAMAGE_NO;
 }
-void()	tbaby_die2	=[	$exp,		tbaby_run1	] 
+void()	tbaby_die2	=[	$exp,		SUB_Null	]
 {
 	T_RadiusDamage (self, self, 120, world);
 	
@@ -361,13 +361,13 @@ void() monster_tarbaby =
 		remove(self);
 		return;
 	}
-	precache_model2 ("progs/tarbaby.mdl");
+	safe_precache_model2 ("progs/tarbaby.mdl");
 
-	precache_sound2 ("blob/death1.wav");
-	precache_sound2 ("blob/hit1.wav");
-	precache_sound2 ("blob/land1.wav");
-	precache_sound2 ("blob/sight1.wav");
-	precache_sound2 ("blob/idle.wav");
+	safe_precache_sound2 ("blob/death1.wav");
+	safe_precache_sound2 ("blob/hit1.wav");
+	safe_precache_sound2 ("blob/land1.wav");
+	safe_precache_sound2 ("blob/sight1.wav");
+	safe_precache_sound2 ("blob/idle.wav");
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;

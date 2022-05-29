@@ -261,7 +261,7 @@ void() shub_finale_4 =
 
 		// kill everything else
 		shub_gibnearby();
-		Cheat_Genocide();
+		ExecuteGenocide();
 		
 		// allow the player to click back to a reset start map
 		nextmap = self.map;
